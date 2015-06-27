@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Open FileBrowser'
+      'command': 'file-browser:open'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'FileBrowser'
+      'submenu': [
+        {
+          'label': 'Open'
+          'command': 'file-browser:open'
+        }
+      ]
+    ]
+  }
+]
