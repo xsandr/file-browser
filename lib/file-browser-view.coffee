@@ -7,5 +7,8 @@ class FileBrowserView extends TextEditorView
 
   setFiles: (files)->
     @setText(files.map (file)->
-      file.showedFilename
+      if file.isDir
+        "▸#{file.showedFilename}"
+      else
+        file.showedFilename
     .join('\n'))
