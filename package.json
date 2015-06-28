@@ -1,7 +1,7 @@
 {
   "name": "file-browser",
   "main": "./lib/file-browser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "FileBrowser is a better Tree View",
   "keywords": [
     "files",
