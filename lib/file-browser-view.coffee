@@ -5,7 +5,7 @@ class FileBrowserView extends TextEditorView
   getTitle: ->
     "FileBrowser"
 
-  setItems: (files)->
+  setFiles: (files)->
     @setText(files.map (file)->
       file.showedFilename
     .join('\n'))
