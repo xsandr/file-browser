@@ -5,19 +5,21 @@ path = require 'path'
 
 getDirectoryFiles = (directory)->
   files = fs.readdirSync(directory)
-  filesInfo = [
+  folderList = [
     showedFilename: '..'
     realFilename: path.dirname(directory)
     isDir: true
   ]
+  fileList = []
   for fileName in files
     filePath = path.join(directory, fileName)
-    filesInfo.push
+    item =
       showedFilename: fileName
       realFilename: filePath
       isDir: fs.lstatSync(filePath).isDirectory()
+    if item.isDir then folderList.push item else fileList.push item
 
-  filesInfo
+  folderList.concat fileList
 
 module.exports = FileBrowser =
   currentDirectory: null
