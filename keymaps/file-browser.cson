@@ -1,2 +1,4 @@
 'atom-workspace':
   'f1': 'file-browser:open'
+'.file-browser':
+  's':  'file-browser:search'

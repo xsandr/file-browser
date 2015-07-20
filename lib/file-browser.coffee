@@ -33,6 +33,7 @@ module.exports = FileBrowser =
 
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace', 'file-browser:open': => @open()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'file-browser:search': => @search()
 
   deactivate: ->
     @subscriptions.dispose()
@@ -44,8 +45,11 @@ module.exports = FileBrowser =
   open: ->
     self = @
     editor = atom.workspace.getActiveTextEditor()
+    return if !editor
+
     filePath = editor.getPath()
-    files = getDirectoryFiles(path.dirname(filePath))
+    @currentDirectory = path.dirname(filePath)
+    files = getDirectoryFiles(@currentDirectory)
 
     @fileBrowserView = new FileBrowserView()
     @fileBrowserView.setFiles(files)
@@ -54,16 +58,22 @@ module.exports = FileBrowser =
     filebrowserEditor = pane.addItem(@fileBrowserView)
     pane.activateItem(filebrowserEditor)
 
-
     filebrowserEditor.keydown (event)->
       if event.which == 13
         event.stopPropagation()
         cursor = filebrowserEditor.model.cursors[0]
 
         file = files[cursor.getBufferRow()]
+        self.currentDirectory = file.realFilename
         if file.isDir
           files = getDirectoryFiles(file.realFilename)
           self.fileBrowserView.setFiles(files)
         else
           atom.workspace.open(file.realFilename)
     return
+
+  search: ->
+    return if atom.workspace.getActiveTextEditor()
+    target = atom.views.getView(atom.workspace.getActivePane().activeItem)
+    target.dataset.path = @currentDirectory
+    atom.commands.dispatch target, 'project-find:show-in-current-directory'

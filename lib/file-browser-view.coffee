@@ -6,6 +6,7 @@ class FileBrowserView extends TextEditorView
     "FileBrowser"
 
   setFiles: (files)->
+    @.addClass('file-browser')
     @setText(files.map (file)->
       if file.isDir
         "▸#{file.showedFilename}"
