@@ -71,6 +71,12 @@ module.exports = FileBrowser =
           self.fileBrowserView.setFiles(files)
         else
           atom.workspace.open(file.realFilename)
+      if event.which == 8
+        event.stopPropagation()
+        self.currentDirectory = path.dirname(self.currentDirectory)
+        files = getDirectoryFiles(self.currentDirectory)
+        self.fileBrowserView.setFiles(files)
+
     return
 
   search: ->
