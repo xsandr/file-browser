@@ -73,10 +73,17 @@ module.exports = FileBrowser =
           atom.workspace.open(file.realFilename)
       if event.which == 8
         event.stopPropagation()
+        previousDirectory = self.currentDirectory
         self.currentDirectory = path.dirname(self.currentDirectory)
         files = getDirectoryFiles(self.currentDirectory)
+        row = files.map (i) ->
+          i.realFilename
+        .indexOf previousDirectory
         self.fileBrowserView.setFiles(files)
 
+        cursor = filebrowserEditor.model.cursors[0]
+        cursor.moveToTop()
+        cursor.moveDown(row)
     return
 
   search: ->
