@@ -45,9 +45,10 @@ module.exports = FileBrowser =
   open: ->
     self = @
     editor = atom.workspace.getActiveTextEditor()
-    return if !editor
+    filePath = atom.project.rootDirectories[0].path + '/.'
+    if editor
+      filePath = editor.getPath()
 
-    filePath = editor.getPath()
     @currentDirectory = path.dirname(filePath)
     files = getDirectoryFiles(@currentDirectory)
 
