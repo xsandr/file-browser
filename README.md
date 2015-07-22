@@ -8,7 +8,8 @@ Trying to make port of [SublimeFileBrowser](https://github.com/aziz/SublimeFileB
 
 
 ### Shortcuts
-| Command            | Shortcut      |
-| :----------------- | :------------ |
-| Open file-browser  | <kbd>f1</kbd> |
-| Find in Files      | <kbd>s</kbd>  |
+| Command                 | Shortcut              |
+| :---------------------- | :-------------------- |
+| Open file-browser       | <kbd>f1</kbd>         |
+| Find in Files           | <kbd>s</kbd>          |
+| Go to parent directory  | <kbd>backspace</kbd>  |
