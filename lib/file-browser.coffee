@@ -60,10 +60,10 @@ module.exports = FileBrowser =
     pane.activateItem(filebrowserEditor)
 
     filebrowserEditor.keydown (event)->
+      # enter
       if event.which == 13
         event.stopPropagation()
         cursor = filebrowserEditor.model.cursors[0]
-
         file = files[cursor.getBufferRow()]
         self.currentDirectory = file.realFilename
         if file.isDir
@@ -71,6 +71,9 @@ module.exports = FileBrowser =
           self.fileBrowserView.setFiles(files)
         else
           atom.workspace.open(file.realFilename)
+        cursor.moveToTop()
+
+      # backspace
       if event.which == 8
         event.stopPropagation()
         previousDirectory = self.currentDirectory

@@ -8,8 +8,8 @@ class FileBrowserView extends TextEditorView
   setFiles: (files)->
     @.addClass('file-browser')
     @setText(files.map (file)->
+      prefix = "≡ "
       if file.isDir
-        "▸#{file.showedFilename}"
-      else
-        file.showedFilename
+        prefix = "▸ "
+      prefix + file.showedFilename
     .join('\n'))
